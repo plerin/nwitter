@@ -5,7 +5,7 @@ import Home from "../routes/Home";
 import Navigation from "components/navigation";
 import Profile from "routes/Profile";
 
-const AppRouter = ({isLoggedIn}) => {
+const AppRouter = ({isLoggedIn, userObj}) => {
     
     return (
         <Router>
@@ -15,7 +15,7 @@ const AppRouter = ({isLoggedIn}) => {
                 //fragment = 부모없이 많은 요소를 render하고 싶을 때 사용 
                 <>
                     <Route exact path="/">
-                        <Home />
+                        <Home userObj={userObj} />
                     </Route>
                     <Route exact path="/profile">
                         <Profile />
