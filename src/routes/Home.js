@@ -5,24 +5,11 @@ import React, { useEffect, useState } from "react";
 const Home = ({userObj}) => {
     const [nweet, setNweet] = useState("");
     const [nweets, setNweets] = useState([]);
-    // const getNweets = async () => {
-    //     // 반환이 promise이기 때문에 const를 따로 잡아야 하고 await/async가 필요, 
-    //     const dbNweets = await dbService.collection("nweets").get();
-    //     dbNweets.forEach(document => {  //dbNweets QUERYSNAPSHOT이라서 forEach를 돌며 document를 받는다 
-    //         const nweetObject = {
-    //             ...document.data(), //firebase-firestore에 담긴 데이터
-    //             id: document.id
-                
-    //         }
-
-    //         setNweets((prev) => [nweetObject, ...prev]);
-    //     });
-    // }
 
     useEffect(() => {
-        //getNweets();
-        
+        // onSnapshot : 기본적으로 데이터베이스에 무슨일이 있을 때 알림을 받아!
         dbService.collection("nweets").onSnapshot(snapshot => {
+            // ...doc.data()는 배열의 모든 요소를 받아오는 것이야 
             const nweetArray = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
             setNweets(nweetArray);
         });
@@ -30,6 +17,7 @@ const Home = ({userObj}) => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
+        // collection에 doc 추가하는 코드 
         await dbService.collection("nweets").add({
             text: nweet,
             createAt: Date.now(),
