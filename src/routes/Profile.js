@@ -9,23 +9,23 @@ export default () => {
         history.push("/");
     };
 
-    const [apple, setApple] = useState("");
-    const onSubmit = (event) => {
-        event.preventDefault();
-        console.log(apple)
-        setApple("");
+    // const [apple, setApple] = useState("");
+    // const onSubmit = (event) => {
+    //     event.preventDefault();
+    //     console.log(apple)
+    //     setApple("");
         
-    }
-    const onChange = (event) => {
-        const {target:{value}} = event;
-        setApple(value);
-    }
+    // }
+    // const onChange = (event) => {
+    //     const {target:{value}} = event;
+    //     setApple(value);
+    // }
     return (
         <>
-        <form onSubmit={onSubmit}>
+        {/* <form onSubmit={onSubmit}>
             <input onChange={onChange} type="text" name="app" value={apple} />
             <input type="submit" value="submit" />
-        </form>
+        </form> */}
             <button onClick={onLogOutClick}>Log Out</button>
         </>
     );

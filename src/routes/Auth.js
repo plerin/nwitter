@@ -49,7 +49,9 @@ const Auth = () => {
     } else if(name === "github"){
       provider = new firebaseInstance.auth.GithubAuthProvider();
     }
+    // data = google/github 로그인 정보 
     const data = await authService.signInWithPopup(provider);
+    
   }
   return (
     <div>
