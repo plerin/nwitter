@@ -5,11 +5,11 @@ import Home from "../routes/Home";
 import Navigation from "components/navigation";
 import Profile from "routes/Profile";
 
-const AppRouter = ({isLoggedIn, userObj}) => {
+const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
     
     return (
         <Router>
-            {isLoggedIn && <Navigation />}
+            {isLoggedIn && <Navigation userObj={userObj} />}
             <Switch>
                 {isLoggedIn ? 
                 //fragment = 부모없이 많은 요소를 render하고 싶을 때 사용 
@@ -18,7 +18,7 @@ const AppRouter = ({isLoggedIn, userObj}) => {
                         <Home userObj={userObj} />
                     </Route>
                     <Route exact path="/profile">
-                        <Profile />
+                        <Profile userObj={userObj} refreshUser={refreshUser} />
                     </Route>
                 </> : <Route exact path="/">
                         <Auth />

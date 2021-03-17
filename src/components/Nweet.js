@@ -29,7 +29,6 @@ const Nweet = ({nweetObj, isOwner}) => {
         setEditing(false);
     }
 
-    
     return (
 
         <div>

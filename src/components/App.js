@@ -11,14 +11,29 @@ function App() {
     // onAuthStateChanged = auth에 변화가 생길 때 ex) 로그인 / 로그아웃
     authService.onAuthStateChanged((user) => {
       if (user) {
-        setUserObj(user);
+        //setUserObj(user);
+        setUserObj({
+          displayName: user.displayName,
+          uid : user.uid,
+          updateProfile: (args) => user.updateProfile(args)
+        })
       }
       setInit(true);
     });
   }, []);
+
+  const refreshUser = () => {
+    const user = authService.currentUser
+    // obj가 크면 뭘 렌더링 하는지 몰라 그래서 setUserObj 안의 내용을 줄여 ,, ex) setUserObj(user)로 하면 react가 어떤걸 rerender할지 몰라 
+    setUserObj({
+      displayName: user.displayName,
+      uid : user.uid,
+      updateProfile: (args) => user.updateProfile(args)
+    });
+  }
   return (
     <>
-      {init ? <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "Initializing"}
+      {init ? <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} refreshUser={refreshUser} /> : "Initializing"}
       {/* <footer>&copy; {new Date().getFullYear()} Nwitter</footer> */}
     </>
   );
